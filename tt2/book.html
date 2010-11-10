@@ -1,0 +1,6 @@
+[% PROCESS header.html title=book.title %]
+<h1>[% book.title |html%]</h1>
+<p>book id: [% book.book_id %]</p>
+<div>[% book.body |html%]</div>
+<p><a href="/">up</a></p>
+[% PROCESS footer.html %]

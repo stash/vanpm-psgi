@@ -1,0 +1,14 @@
+[% PROCESS header.html title='all books' %]
+<h1>Books</h1>
+[% FOREACH book IN books %]
+<h2>[% book.title |html%]</h2>
+<p>book id: [% book.book_id %]</p>
+<p>[% book.body |html%]</p>
+[% END %]
+<h1>Add Book</h1>
+<form action="/books" method="POST">
+<p>Title:<input type="text" name="title" /></p>
+<p>Contents:<br /><textarea name="body"></textarea></p>
+<p><input type="submit" /></p>
+</form>
+[% PROCESS footer.html %]
