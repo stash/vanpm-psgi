@@ -14,9 +14,7 @@ sub dbh {
     return $dbh;
 }
 
-my $tt2_config = {
-    INCLUDE_PATH => 'tt2',
-};
+my $tt2_config = { INCLUDE_PATH => 'tt2' };
 my $tt2 = Template->new($tt2_config);
 
 sub process_template {
