@@ -38,8 +38,11 @@ sub show_book {
 builder {
     enable 'Debug', panels => [qw(
         Environment Response Memory Timer 
-        DBITrace ModuleVersions Parameters Session PerlConfig
+        ModuleVersions Parameters Session PerlConfig
     )];
+    enable 'Debug::DBIProfile', profile => 2;
+    enable 'Debug::DBITrace';
+    # mount '/someotherapp' => $otherapp;
     sub {
         my $req = Plack::Request->new(shift);
         if ($req->method eq 'POST') {
@@ -47,7 +50,7 @@ builder {
             my $dbh = dbh();
             my $sth = $dbh->prepare(q{INSERT INTO books (title,body) VALUES (?,?)});
             $sth->execute($post->{title}, $post->{body});
-            my $book_id = $dbh->sqlite_last_insert_rowid();
+            my $book_id = $dbh->last_insert_id('','','','');
             show_book($book_id,$dbh);
         }
         elsif ($req->method eq 'GET') {
